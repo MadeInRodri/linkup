@@ -1,0 +1,55 @@
+header {
+  height: 150px;
+  background: linear-gradient(to right, #3800a8, #fd007a);
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.espacioimg {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  max-width: 500px;
+}
+
+.imagen {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.nombre {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.arroba {
+  margin: 5px 0;
+  color: #a39696;
+  font-style: italic;
+}
+
+.descripcion {
+  margin: 0;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.btnagregar {
+  width: 3.5rem;
+  height: 1.3rem;
+  border-radius: 40%;
+  border: none;
+  background-image: linear-gradient(to right, #3800a8, #fd007a);
+}
