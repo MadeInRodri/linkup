@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "name": "Rodrigo Mejia",
+    "username": "rodrigo.mejia",
+    "description": "Esto es mi descripción",
+    "email": "rodrigo@gmail.com",
+    "friends": [2, 3, 4, 5, 6, 7],
+    "profile_pic": "url...",
+    "bio_pic": "url...",
+    "password": "1234"
+  }
+]

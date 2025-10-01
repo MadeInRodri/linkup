@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../styles/homepage.css" />
+    <link rel="stylesheet" href="../styles/create.css" />
+    <title>Pagina Principal</title>
+  </head>
+  <body>
+    <!--Encabezado-->
+    <header>LinkUp</header>
+    <!--Cuerpo principal de la ventana-->
+    <div class="principal-container">
+      <!--Navbar-->
+      <nav class="navbar">
+        <a href="./homepage.html">
+          <i class="fa-solid fa-house"></i>
+          <span class="text-button">Inicio</span>
+        </a>
+        <a href="./create.html">
+          <i class="fa-solid fa-plus"></i>
+          <span class="text-button">Crear</span>
+        </a>
+        <a href="#">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span class="text-button">Buscar</span>
+        </a>
+        <a href="./profile.html">
+          <i class="fa-solid fa-circle-user"></i>
+          <span class="text-button">Mi Perfil</span>
+        </a>
+      </nav>
+      <main>
+        <!--Crear Post-->
+        <article class="create-container">
+          <picture>
+            <img src="../images/yakuza.jpg" />
+          </picture>
+          <section>
+            <textarea
+              placeholder="Escribe algo:"
+              id="textarea-post"
+              cols="3"
+            ></textarea>
+            <div class="create-buttons">
+              <button class="create-button" id="upload-btn">
+                <i class="fa-solid fa-image"></i>
+                <span>Agrega una imágen</span>
+              </button>
+              <input type="file" id="file-input" accept="image/*" hidden />
+              <button class="create-button" id="publish-btn">Publicar</button>
+            </div>
+          </section>
+        </article>
+        <h3>Vista previa:</h3>
+        <!--Publicación-->
+        <article class="post-container" id="post-container"></article>
+      </main>
+      <aside class="side-menu">
+        <section class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Buscar amigo" />
+        </section>
+        <section class="friends">
+          <iframe src="./listaamigos.html" width="100%" height="100%"></iframe>
+
+          <!-- <article>
+            <img src="" alt="" />
+            <div>
+              <img src="" alt="" />
+              <div>
+                <h4>Name</h4>
+                <h5>@Username</h5>
+              </div>
+            </div>
+          </article> -->
+        </section>
+      </aside>
+    </div>
+  </body>
+  <script src="../scripts/create.js" type="module"></script>
+</html>
