@@ -1,10 +1,5 @@
 /* ZONA DE IMPORTACIONES */
-import {
-  getUserById,
-  getPostsByUser,
-  likePost,
-  unlikePost,
-} from "./firebase.js";
+import { getPostsByUser, likePost, unlikePost } from "./firebase.js";
 
 //Consiguiendo cosas del html...
 const mainContainer = document.querySelector("main");
