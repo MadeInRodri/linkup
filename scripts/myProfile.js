@@ -1,29 +1,15 @@
-import {
-  addFriend,
-  getPostsByUser,
-  getUserById,
-  likePost,
-  removeFriend,
-  unlikePost,
-} from "./firebase.js";
+/* ZONA DE IMPORTACIONES */
+import { getPostsByUser, likePost, unlikePost } from "./firebase.js";
 
+//Consiguiendo cosas del html...
 const mainContainer = document.querySelector("main");
-// Obtener parámetros de la URL
-const params = new URLSearchParams(window.location.search);
+const userId = localStorage.getItem("idUsuario");
 
-// Capturar el user_id
-const userId = params.get("user_id");
-let miUsuario = JSON.parse(localStorage.getItem("infoUsuarioActual"));
-
-if (userId == miUsuario.id) {
-  window.location.href = "/views/myProfile.html";
-}
-
+//MÉTODO QUE CARGA LA INFO DEL USUARIO DEL LOCALSTORAGE Y LA COLOCA EN EL ENCABEZADO
 const cargarUsuario = async () => {
-  let usuario = await getUserById(userId);
+  let usuario = JSON.parse(localStorage.getItem("infoUsuarioActual"));
   let amigos = usuario.friends.length;
-  let esAmigo = miUsuario.friends.includes(usuario.id);
-  console.log(`Es mi amigo: ${esAmigo}`);
+
   let perfilUsuarioHTML = `
     <article class="profile-container">
   <section class="photo">
@@ -35,53 +21,16 @@ const cargarUsuario = async () => {
     <h2>${usuario.name}</h2>
     <h3>@${usuario.username}</h3>
     <p>${usuario.description}</p>
-    <div class="buttons-container">
     <button class="profile-button">
       <i class="fa-solid fa-user-group"></i>
-      <span id="span-friends">${amigos}</span>
+      <span>${amigos}</span>
     </button>
-    <button class="profile-button" id="friend-button">
-      <i id="icon-friend" class="fa-solid ${esAmigo ? "fa-x" : "fa-plus"}"></i>
-      <span id="friend-button-text">${esAmigo ? "Eliminar" : "Agregar"}</span>
-    </button>
-    </div>
   </section>
 </article>
   `;
-  mainContainer.innerHTML = perfilUsuarioHTML;
+  mainContainer.innerHTML += perfilUsuarioHTML;
 
-  await cargarPostsUsuario(usuario);
-
-  const friendBtn = document.getElementById("friend-button");
-
-  friendBtn.addEventListener("click", async () => {
-    const friendBtnText = document.getElementById("friend-button-text");
-    const icon = document.getElementById("icon-friend");
-    const span = document.getElementById("span-friends");
-    let friendCount = parseInt(span.textContent);
-    const alreadyFriend = icon.classList.contains("fa-x");
-
-    if (alreadyFriend) {
-      await removeFriend(miUsuario.id, userId);
-      await removeFriend(userId, miUsuario.id);
-      icon.classList.remove("fa-x");
-      icon.classList.add("fa-plus");
-      friendBtnText.textContent = "Agregar";
-      span.textContent = friendCount - 1;
-
-      miUsuario.friends = miUsuario.friends.filter((id) => id !== userId);
-    } else {
-      await addFriend(miUsuario.id, userId);
-      await addFriend(userId, miUsuario.id);
-      icon.classList.remove("fa-plus");
-      icon.classList.add("fa-x");
-      friendBtnText.textContent = "Eliminar";
-      span.textContent = friendCount + 1;
-
-      miUsuario.friends.push(userId);
-    }
-    localStorage.setItem("infoUsuarioActual", JSON.stringify(miUsuario));
-  });
+  cargarPostsUsuario(usuario);
 };
 
 //MÉTODO QUE TRAE LOS POST DEL USUARIO DE LA BASE Y LOS IMPRIME EN EL MURO PERSONAL
@@ -144,14 +93,14 @@ const cargarPostsUsuario = async (myUser) => {
 
         if (alreadyLiked) {
           // Quitar like
-          await unlikePost(postId, miUsuario.id);
+          await unlikePost(postId, userId);
           icon.classList.remove("fa-solid", "text-red-500");
           icon.classList.add("fa-regular");
           icon.style = "color:black";
           span.textContent = likesCount - 1;
         } else {
           // Dar like
-          await likePost(postId, miUsuario.id);
+          await likePost(postId, userId);
           icon.classList.remove("fa-regular");
           icon.classList.add("fa-solid");
           icon.style = "color:red";
@@ -162,4 +111,5 @@ const cargarPostsUsuario = async (myUser) => {
   }
 };
 
-cargarUsuario();
+/* ZONA DE EJECUCIÓN DE MÉTODOS */
+document.addEventListener("DOMContentLoaded", cargarUsuario);

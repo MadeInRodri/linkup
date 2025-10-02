@@ -9,16 +9,24 @@ import {
 /* ZONA EN DESARROLLO, ESTA PANTALLA POR AHORA ES PARA PRUEBAS */
 
 //Método para crear un usuario (pantalla de registarse)
-const createUser = (name, username, email, password) => {
+const createUser = (
+  name,
+  username,
+  email,
+  password,
+  description = "Hola, estoy usando LinkUp!",
+  profile_pic = "https://res.cloudinary.com/diogirqun/image/upload/v1759378125/usuario_mswads.png",
+  bio_pic = "https://res.cloudinary.com/diogirqun/image/upload/v1759378247/luke-chesser-pJadQetzTkI-unsplash_mpmrjs.jpg"
+) => {
   let user = {
     name: name,
     username: username,
     email: email,
     password: password,
-    description: "",
+    description: description,
     friends: [],
-    profile_pic: "",
-    bio_pic: "",
+    profile_pic: profile_pic,
+    bio_pic: bio_pic,
   };
 
   createAccount(user);
@@ -39,7 +47,12 @@ const userPost = (user_id, description, picture) => {
   createPost(post);
 };
 
-//createUser("Alexis Rivas", "rivas.mejia.55", "rivasmejia@gmail.com", "1234");
+createUser(
+  "Michael Scott",
+  "michael.scott.the.real",
+  "michael@gmail.com",
+  "1234"
+);
 
 //Método para logearse (pantalla de login)
 const login = async (email, password) => {
@@ -68,5 +81,5 @@ const cargarPosts = async () => {
 //
 
 console.log("Hola");
-login("rivasmejia@gmail.com", "1234");
-cargarPosts();
+login("michael@gmail.com", "1234");
+//cargarPosts();

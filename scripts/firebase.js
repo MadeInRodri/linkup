@@ -12,6 +12,7 @@ import {
   getDoc,
   updateDoc,
   arrayUnion,
+  orderBy,
   arrayRemove,
   onSnapshot,
   deleteDoc,
@@ -104,6 +105,30 @@ export const getUserById = async (userId) => {
   }
 };
 
+export const addFriend = async (currentUserId, friendId) => {
+  try {
+    const userRef = doc(db, "users", currentUserId);
+    await updateDoc(userRef, {
+      friends: arrayUnion(friendId),
+    });
+  } catch (error) {
+    console.error("Error al agregar friend:", error);
+    throw error;
+  }
+};
+
+export const removeFriend = async (currentUserId, friendId) => {
+  try {
+    const userRef = doc(db, "users", currentUserId);
+    await updateDoc(userRef, {
+      friends: arrayRemove(friendId),
+    });
+  } catch (error) {
+    console.error("Error al eliminar friend:", error);
+    throw error;
+  }
+};
+
 /* ADMINISTRAR POSTS */
 
 export const createPost = async (post) => {
@@ -131,12 +156,35 @@ export const getPosts = async () => {
   return posts;
 };
 
+export const getPostsByDate = async () => {
+  console.log("Obteniendo Post ordenados por fecha...");
+  const q = query(
+    collection(db, "posts"),
+    orderBy("date", "desc") // 👈 desc = más nuevos primero
+  );
+
+  const querySnapshot = await getDocs(q);
+  const posts = [];
+  querySnapshot.forEach((doc) => {
+    posts.push({
+      id: doc.id,
+      ...doc.data(),
+    });
+  });
+
+  return posts;
+};
+
 export const getPostsByUser = async (userId) => {
   try {
     console.log("Obteniendo posts del usuario:", userId);
 
     const postsRef = collection(db, "posts");
-    const q = query(postsRef, where("user_id", "==", userId));
+    const q = query(
+      postsRef,
+      where("user_id", "==", userId),
+      orderBy("date", "desc")
+    );
     const querySnapshot = await getDocs(q);
 
     const posts = [];
@@ -146,7 +194,7 @@ export const getPostsByUser = async (userId) => {
         ...doc.data(),
       });
     });
-
+    // posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     return posts;
   } catch (error) {
     console.error("Error al obtener posts por usuario:", error);

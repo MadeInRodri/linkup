@@ -18,6 +18,11 @@
   font-family: var(--principal-font);
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 header {
   width: 100vw;
   height: 10vh;
@@ -54,7 +59,6 @@ header {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-
     i {
       font-size: 1.2rem;
     }
@@ -89,11 +93,16 @@ header {
   }
 
   .friends {
+    padding: 0.5rem 0.5rem;
     height: 90%;
 
-    iframe {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    /* iframe {
       border: none;
-    }
+    } */
   }
 }
 
@@ -126,6 +135,20 @@ main {
     height: auto;
     display: block;
     border-radius: 1rem 1rem 0rem 0rem;
+  }
+}
+
+.card {
+  /* border: 1px dashed red; */
+  position: relative;
+  border-radius: 1rem;
+  border: 3px solid #fdf0ef;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 1rem;
   }
 }
 
@@ -164,7 +187,12 @@ main {
   }
 }
 
-.blur {
+.buttons-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* .blur {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -173,7 +201,7 @@ main {
   background-color: #fafafa10;
   backdrop-filter: blur(0.4rem);
   mask-image: linear-gradient(to bottom, transparent 0%, #fffefe 50%);
-}
+} */
 
 .actions-post {
   position: absolute;
@@ -297,9 +325,9 @@ main {
     flex-direction: column;
 
     .navbar {
-      z-index: 100;
+      /* z-index: 100;
       position: absolute;
-      bottom: 0;
+      bottom: 0; */
       order: 2;
       width: 100vw;
       background-color: white;
