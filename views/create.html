@@ -10,7 +10,9 @@
 
     <link rel="stylesheet" href="../styles/homepage.css" />
     <link rel="stylesheet" href="../styles/create.css" />
-    <title>Pagina Principal</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" href="../images/linkup.png" type="image/png" />
+    <title>Crear</title>
   </head>
   <body>
     <!--Encabezado-->
@@ -27,7 +29,7 @@
           <i class="fa-solid fa-plus"></i>
           <span class="text-button">Crear</span>
         </a>
-        <a href="#">
+        <a href="./search.html">
           <i class="fa-solid fa-magnifying-glass"></i>
           <span class="text-button">Buscar</span>
         </a>
@@ -40,7 +42,7 @@
         <!--Crear Post-->
         <article class="create-container">
           <picture>
-            <img src="../images/yakuza.jpg" />
+            <img src="" id="profile-img" />
           </picture>
           <section>
             <textarea
@@ -63,9 +65,8 @@
         <article class="post-container" id="post-container"></article>
       </main>
       <aside class="side-menu">
-        <section class="search">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="Buscar amigo" />
+        <section class="title">
+          <h3>Mis amigos:</h3>
         </section>
         <section class="friends" id="friends-container"></section>
       </aside>

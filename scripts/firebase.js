@@ -42,9 +42,9 @@ export const createAccount = async (user) => {
     const docRef = await addDoc(collection(db, "users"), user);
     //obtener key única
     const key = docRef._key.path.segments[1];
-    console.log(docRef);
-    console.log(key);
-    console.log("Usuario creado");
+    // console.log(docRef);
+    // console.log(key);
+    // console.log("Usuario creado");
   } catch (error) {
     console.log(error);
   }
@@ -80,8 +80,33 @@ export const loginUser = async (email, password) => {
       return null;
     }
   } catch (error) {
-    // console.error("Error en login:", error);
+    console.error("Error en login:", error);
     return null;
+  }
+};
+
+export const updateUser = async (
+  id,
+  name,
+  description,
+  profile_url,
+  bio_url
+) => {
+  try {
+    const userRef = doc(db, "users", id);
+
+    await updateDoc(userRef, {
+      name: name,
+      description: description,
+      profile_pic: profile_url,
+      bio_pic: bio_url,
+    });
+
+    // console.log("Usuario actualizado con éxito");
+    return true;
+  } catch (error) {
+    console.error("Error al actualizar usuario:", error);
+    return false;
   }
 };
 
@@ -93,16 +118,29 @@ export const getUserById = async (userId) => {
     const userSnap = await getDoc(userRef);
 
     if (userSnap.exists()) {
-      console.log("Usuario encontrado");
+      // console.log("Usuario encontrado");
       return { id: userSnap.id, ...userSnap.data() };
     } else {
-      console.log("Usuario no encontrado");
+      // console.log("Usuario no encontrado");
       return null;
     }
   } catch (error) {
     console.error("Error al obtener usuario:", error);
     return null;
   }
+};
+
+export const getUsers = async () => {
+  // console.log("Obteniendo usuarios...");
+  const querySnapshot = await getDocs(collection(db, "users"));
+  const users = [];
+  querySnapshot.forEach((doc) => {
+    users.push({
+      id: doc.id,
+      ...doc.data(),
+    });
+  });
+  return users;
 };
 
 export const addFriend = async (currentUserId, friendId) => {
@@ -136,10 +174,12 @@ export const createPost = async (post) => {
     const docRef = await addDoc(collection(db, "posts"), post);
     //obtener key única
     const key = docRef.id;
-    console.log(docRef);
-    console.log(key);
+    // console.log(docRef);
+    // console.log(key);
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 
@@ -157,11 +197,8 @@ export const getPosts = async () => {
 };
 
 export const getPostsByDate = async () => {
-  console.log("Obteniendo Post ordenados por fecha...");
-  const q = query(
-    collection(db, "posts"),
-    orderBy("date", "desc") // 👈 desc = más nuevos primero
-  );
+  // console.log("Obteniendo Post ordenados por fecha...");
+  const q = query(collection(db, "posts"), orderBy("date", "desc"));
 
   const querySnapshot = await getDocs(q);
   const posts = [];
@@ -177,7 +214,7 @@ export const getPostsByDate = async () => {
 
 export const getPostsByUser = async (userId) => {
   try {
-    console.log("Obteniendo posts del usuario:", userId);
+    // console.log("Obteniendo posts del usuario:", userId);
 
     const postsRef = collection(db, "posts");
     const q = query(
@@ -194,7 +231,6 @@ export const getPostsByUser = async (userId) => {
         ...doc.data(),
       });
     });
-    // posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     return posts;
   } catch (error) {
     console.error("Error al obtener posts por usuario:", error);
@@ -210,7 +246,7 @@ export const likePost = async (postId, userId) => {
       likes: arrayUnion(userId), // agrega userId si no existe
     });
 
-    console.log(`Usuario ${userId} dio like al post ${postId}`);
+    // console.log(`Usuario ${userId} dio like al post ${postId}`);
   } catch (error) {
     console.error("Error al dar like:", error);
   }
@@ -224,8 +260,19 @@ export const unlikePost = async (postId, userId) => {
       likes: arrayRemove(userId), // elimina userId si existe
     });
 
-    console.log(`Usuario ${userId} quitó like al post ${postId}`);
+    // console.log(`Usuario ${userId} quitó like al post ${postId}`);
   } catch (error) {
     console.error("Error al quitar like:", error);
+  }
+};
+
+export const deletePost = async (id) => {
+  try {
+    await deleteDoc(doc(db, "posts", id));
+    // console.log(`Post ${id} eliminado correctamente`);
+    return true;
+  } catch (error) {
+    console.error("Error al eliminar post:", error);
+    throw error;
   }
 };

@@ -1,3 +1,4 @@
+import { agregarAmigoAlert, eliminarAmigoAlert } from "./alerts.js";
 import {
   addFriend,
   getPostsByUser,
@@ -15,6 +16,7 @@ const params = new URLSearchParams(window.location.search);
 const userId = params.get("user_id");
 let miUsuario = JSON.parse(localStorage.getItem("infoUsuarioActual"));
 
+//Si el usuario se mete a un perfil que sea suyo, pues redirige a su perfil
 if (userId == miUsuario.id) {
   window.location.href = "/views/myProfile.html";
 }
@@ -64,6 +66,7 @@ const cargarUsuario = async () => {
     if (alreadyFriend) {
       await removeFriend(miUsuario.id, userId);
       await removeFriend(userId, miUsuario.id);
+      eliminarAmigoAlert();
       icon.classList.remove("fa-x");
       icon.classList.add("fa-plus");
       friendBtnText.textContent = "Agregar";
@@ -73,6 +76,7 @@ const cargarUsuario = async () => {
     } else {
       await addFriend(miUsuario.id, userId);
       await addFriend(userId, miUsuario.id);
+      agregarAmigoAlert();
       icon.classList.remove("fa-plus");
       icon.classList.add("fa-x");
       friendBtnText.textContent = "Eliminar";

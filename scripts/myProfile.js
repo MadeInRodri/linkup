@@ -1,5 +1,11 @@
 /* ZONA DE IMPORTACIONES */
-import { getPostsByUser, likePost, unlikePost } from "./firebase.js";
+import { eliminarPostAlert } from "./alerts.js";
+import {
+  deletePost,
+  getPostsByUser,
+  likePost,
+  unlikePost,
+} from "./firebase.js";
 
 //Consiguiendo cosas del html...
 const mainContainer = document.querySelector("main");
@@ -21,10 +27,17 @@ const cargarUsuario = async () => {
     <h2>${usuario.name}</h2>
     <h3>@${usuario.username}</h3>
     <p>${usuario.description}</p>
+    <div class="buttons-container">
     <button class="profile-button">
       <i class="fa-solid fa-user-group"></i>
       <span>${amigos}</span>
     </button>
+
+    <a href="./myProfileInfo.html" class="profile-button">
+        <i class="fa-solid fa-pen"></i>
+      <span>Modificar Perfil</span>
+    </a>
+    </div>
   </section>
 </article>
   `;
@@ -64,6 +77,10 @@ const cargarPostsUsuario = async (myUser) => {
       <button class="button-post">
         <i class="fa-regular fa-comment"></i>
         <span>${comments}</span>
+      </button>
+      <button class="button-post delete-btn" id="${post.id}">
+        <i class="fa-solid fa-xmark"></i>
+        <span>Eliminar</span>
       </button>
     </div>
     <div class="blur"></div>
@@ -105,6 +122,18 @@ const cargarPostsUsuario = async (myUser) => {
           icon.classList.add("fa-solid");
           icon.style = "color:red";
           span.textContent = likesCount + 1;
+        }
+      });
+    });
+
+    document.querySelectorAll(".delete-btn").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        const postElement = e.target.closest(".post-container");
+        const postId = e.currentTarget.id;
+        let deleted = await deletePost(postId);
+        if (deleted) {
+          eliminarPostAlert();
+          postElement.remove();
         }
       });
     });

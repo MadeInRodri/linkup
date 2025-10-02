@@ -1,15 +1,19 @@
+/* ZONA DE IMPORTACIÓN DE MÉTODOS */
 import { getUserById } from "./firebase.js";
 
+/* ZONA DE VARIABLES DECLARADAS */
 const friendsContainer = document.getElementById("friends-container");
 let usuario = JSON.parse(localStorage.getItem("infoUsuarioActual"));
 let amigosId = usuario.friends;
 
+//MÉTODO QUE MUESTRA LOS AMIGOS EN EL CONTENEDOR DEL ASIDE EN LA VISTA DE COMPUTADORA
 const mostrarAmigos = async () => {
   let amigosCards = "";
+
+  //Si hay al menos un amigo, recorre el arreglo y los muestra
   if (amigosId.length > 0) {
     for (const amigoId of amigosId) {
       let amigo = await getUserById(amigoId);
-      console.log(amigo);
 
       amigosCards += `
         <article class="card">
@@ -32,8 +36,14 @@ const mostrarAmigos = async () => {
       `;
     }
   }
+  //Sino, un mensaje
+  else {
+    amigosCards = `<h4>No hay amigos que mostrar</h4>`;
+  }
 
+  //Agregamos el HTML
   friendsContainer.innerHTML = amigosCards;
 };
 
+//Ejecutamos el método
 mostrarAmigos();

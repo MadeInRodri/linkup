@@ -1,4 +1,9 @@
 /* ZONA DE IMPORTACIÓN DE MÉTODOS */
+import {
+  publicacionAlert,
+  seleccionarImagenAlert,
+  textoVacioAlert,
+} from "./alerts.js";
 import { subirImagen } from "./cloudinary.js";
 import { createPost } from "./firebase.js";
 
@@ -7,8 +12,10 @@ const textarea = document.querySelector("#textarea-post");
 const publishBtn = document.getElementById("publish-btn");
 const uploadBtn = document.getElementById("upload-btn");
 const fileInput = document.getElementById("file-input");
-const usuario = JSON.parse(localStorage.getItem("infoUsuarioActual"));
 const container = document.querySelector("#post-container");
+const profileImg = document.querySelector("#profile-img");
+
+const usuario = JSON.parse(localStorage.getItem("infoUsuarioActual"));
 
 //GUARDA EL ARCHIVO SUBIDO POR EL USUARIO
 let selectedFile = null;
@@ -37,6 +44,7 @@ const changeImage = (e) => {
 
 //PONER UNA PUBLICACIÓN POR DEFECTO AL CARGARSE LA PÁGINA CON LOS DATOS DEL USUARIO
 const showUserPostPreview = () => {
+  profileImg.src = usuario.profile_pic;
   let postHTML = `
           <section class="post">
     <div id="preview">
@@ -76,12 +84,12 @@ const showUserPostPreview = () => {
 //HACE VERIFICACIONES ANTES DE REALIZAR EL POST
 const posting = async () => {
   if (!selectedFile) {
-    alert("Primero selecciona una imagen");
+    seleccionarImagenAlert();
     return;
   }
 
   if (textarea.value == "") {
-    alert("Escribe algo primero");
+    textoVacioAlert();
     return;
   }
 
@@ -91,7 +99,7 @@ const posting = async () => {
 };
 
 //CREA EL POST
-const userPost = (user_id, description, picture) => {
+const userPost = async (user_id, description, picture) => {
   const fecha = new Date();
   let post = {
     user_id: user_id,
@@ -102,7 +110,10 @@ const userPost = (user_id, description, picture) => {
     date: fecha,
   };
 
-  createPost(post);
+  let posteado = await createPost(post);
+  if (posteado) {
+    publicacionAlert();
+  }
 };
 
 /* ZONA DE EJECUCIÓN DE MÉTODOS */
