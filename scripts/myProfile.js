@@ -137,6 +137,10 @@ const cargarPostsUsuario = async (myUser) => {
         }
       });
     });
+  } else {
+    postsUserHTML = "<h3>No has hecho ninguna publicación</h3>";
+
+    mainContainer.innerHTML += postsUserHTML;
   }
 };
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrarse</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/registro.css" />
+    <link rel="icon" href="../images/linkup.png" type="image/png" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <h1>Registrate</h1>
+    <form id="registroForm" class="d-flex flex-column align-items-center gap-3">
+      <div class="d-flex flex-column">
+        <input
+          id="nombre"
+          type="text"
+          class="contform iusuario"
+          placeholder="Nombre"
+        />
+        <span id="errorNombre" class="text-white small"></span>
+      </div>
+
+      <div class="d-flex flex-column">
+        <input
+          id="apellido"
+          type="text"
+          class="contform iusuario"
+          placeholder="Apellido"
+        />
+        <span id="errorApellido" class="text-white small"></span>
+      </div>
+
+      <div class="d-flex flex-column">
+        <input
+          id="usuario"
+          type="text"
+          class="contform iusuario"
+          placeholder="Usuario"
+        />
+        <span id="errorUsuario" class="text-white small"></span>
+      </div>
+
+      <div class="d-flex flex-column">
+        <input
+          id="correo"
+          type="text"
+          class="contform iusuario"
+          placeholder="Email"
+        />
+        <span id="errorCorreo" class="text-white small"></span>
+      </div>
+
+      <div class="d-flex flex-column">
+        <input
+          id="contra"
+          type="password"
+          class="contform icontra"
+          placeholder="Contraseña"
+        />
+        <span id="errorContra" class="text-white small"></span>
+      </div>
+      <a href="../index.html">¿Ya tienes una cuenta? ¡Logeate!</a>
+      <button type="submit" class="btn btn-login">Ingresar</button>
+    </form>
+  </body>
+  <script src="../scripts/registro.js" type="module"></script>
+</html>

@@ -8,7 +8,6 @@ export const publicacionAlert = () => {
     confirmButtonText: "Ver mi perfil",
   }).then((result) => {
     if (result.isConfirmed) {
-      // 👇 Aquí haces la redirección
       window.location.href = "/views/myProfile.html";
     }
   });
@@ -40,7 +39,6 @@ export const actualizacionAlert = () => {
     confirmButtonText: "Ver mi perfil",
   }).then((result) => {
     if (result.isConfirmed) {
-      // 👇 Aquí haces la redirección
       window.location.href = "/views/myProfile.html";
     }
   });
@@ -79,5 +77,88 @@ export const textoVacioParamAlert = (param) => {
     text: `No puedes dejar ${param} vacío...`,
     icon: "error",
     confirmButtonText: "Ok",
+  });
+};
+
+export const loginIncorrectoAlert = () => {
+  Swal.fire({
+    title: "¡Parece que la contraseña está mal!",
+    text: "Prueba con otra",
+    icon: "error",
+    confirmButtonText: "Ok",
+  });
+};
+
+export const registroIncorrectoAlert = () => {
+  Swal.fire({
+    title: "¡Parece que hubo un problema en el registro!",
+    text: "Intentalo de nuevo por favor",
+    icon: "error",
+    confirmButtonText: "Ok",
+  });
+};
+
+export const usuarioInexistenteAlert = () => {
+  Swal.fire({
+    title: "¡Parece que no existe un usuario con ese correo!",
+    text: "Crea una cuenta para acceder con este email",
+    icon: "error",
+    confirmButtonText: "Ok",
+  });
+};
+
+export const loginExitosoAlert = (nombre) => {
+  Swal.fire({
+    title: "¡Has ingresado con éxito!",
+    text: `Bienvenido ${nombre}`,
+    icon: "success",
+    showConfirmButton: false, // quita el botón
+    timer: 2000, // 2 segundos
+    timerProgressBar: true, // barra de progreso opcional
+    willClose: () => {
+      window.location.href = "/views/homepage.html";
+    },
+  });
+};
+
+export const registroExitosoAlert = (nombre) => {
+  Swal.fire({
+    title: "¡Has creado la cuenta con éxito!",
+    text: `Bienvenido ${nombre}`,
+    icon: "success",
+    showConfirmButton: false, // quita el botón
+    timer: 2000, // 2 segundos
+    timerProgressBar: true, // barra de progreso opcional
+    willClose: () => {
+      window.location.href = "/views/homepage.html";
+    },
+  });
+};
+
+export const cerrarSesionAlert = () => {
+  Swal.fire({
+    title: "¡Has cerrado sesión!",
+    text: "Nos vemos la próxima vez...",
+    icon: "success",
+    showConfirmButton: false, // quita el botón
+    timer: 2000, // 2 segundos
+    timerProgressBar: true, // barra de progreso opcional
+    willClose: () => {
+      window.location.href = "/index.html";
+    },
+  });
+};
+
+export const noUsuarioAlert = () => {
+  Swal.fire({
+    title: "¡Ups.. no has iniciado sesión!",
+    text: "No deberías ver esto, te redirigiremos al login...",
+    icon: "success",
+    showConfirmButton: false, // quita el botón
+    timer: 2000, // 2 segundos
+    timerProgressBar: true, // barra de progreso opcional
+    willClose: () => {
+      window.location.href = "/index.html";
+    },
   });
 };

@@ -1,85 +1,85 @@
 import {
-  createAccount,
-  loginUser,
-  createPost,
-  getPosts,
-  getUserById,
-} from "./firebase.js";
+  loginExitosoAlert,
+  loginIncorrectoAlert,
+  usuarioInexistenteAlert,
+} from "./alerts.js";
+import { loginUser, getUserById } from "./firebase.js";
 
-/* ZONA EN DESARROLLO, ESTA PANTALLA POR AHORA ES PARA PRUEBAS */
-
-//Método para crear un usuario (pantalla de registarse)
-const createUser = (
-  name,
-  username,
-  email,
-  password,
-  description = "Hola, estoy usando LinkUp!",
-  profile_pic = "https://res.cloudinary.com/diogirqun/image/upload/v1759378125/usuario_mswads.png",
-  bio_pic = "https://res.cloudinary.com/diogirqun/image/upload/v1759378247/luke-chesser-pJadQetzTkI-unsplash_mpmrjs.jpg"
-) => {
-  let user = {
-    name: name,
-    username: username,
-    email: email,
-    password: password,
-    description: description,
-    friends: [],
-    profile_pic: profile_pic,
-    bio_pic: bio_pic,
-  };
-
-  createAccount(user);
-};
-
-//Crear un post (pantalla de create)
-const userPost = (user_id, description, picture) => {
-  const fecha = new Date();
-  let post = {
-    user_id: user_id,
-    description: description,
-    picture: picture,
-    likes: [],
-    comments: [],
-    date: fecha,
-  };
-
-  createPost(post);
-};
-
-createUser(
-  "Michael Scott",
-  "michael.scott.the.real",
-  "michael@gmail.com",
-  "1234"
-);
+/* ZONA EN DESARROLLO, ESTA PANTALLA YA NO ESTÁ EN ZONA DE PRUEBAS */
 
 //Método para logearse (pantalla de login)
 const login = async (email, password) => {
   console.log("Hola");
   let id = await loginUser(email, password);
-  let usuario = await getUserById(id);
-  if (id != null) {
-    console.log(id);
-    //Limpiamos por si había una sesión
-    localStorage.clear();
 
-    //Guardamos id y datos del usuario para usarlos más tarde
-    localStorage.setItem("idUsuario", id);
-    localStorage.setItem("infoUsuarioActual", JSON.stringify(usuario));
-  } else {
-    console.log("Email o contraseña erroneos");
+  if (id == false) {
+    loginIncorrectoAlert();
+    return;
   }
+
+  if (id == null) {
+    usuarioInexistenteAlert();
+    return;
+  }
+
+  let usuario = await getUserById(id);
+
+  console.log(id);
+  //Limpiamos por si había una sesión
+  localStorage.clear();
+  //Guardamos id y datos del usuario para usarlos más tarde
+  localStorage.setItem("idUsuario", id);
+  localStorage.setItem("infoUsuarioActual", JSON.stringify(usuario));
+  loginExitosoAlert(usuario.name);
 };
 
-//Método que recibe los post de todos (Si puede estar aquí)
-const cargarPosts = async () => {
-  let posts = await getPosts();
-  console.log(posts);
-};
+//Aqui empieza el login
+const correoInput = document.getElementById("correo");
+const contraInput = document.getElementById("contra");
+const errorCorreo = document.getElementById("errorCorreo");
+const errorContra = document.getElementById("errorContra");
 
-//
+const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const contraRegex = /^[a-zA-Z0-9-]+$/;
 
-console.log("Hola");
-login("michael@gmail.com", "1234");
-//cargarPosts();
+function validarCorreo() {
+  const correo = correoInput.value.trim();
+  if (correo === "") {
+    errorCorreo.textContent = "El correo está vacío.";
+  } else if (!correoRegex.test(correo)) {
+    errorCorreo.textContent = "El correo no tiene un formato válido.";
+  } else {
+    errorCorreo.textContent = "";
+  }
+}
+
+function validarContra() {
+  const contra = contraInput.value.trim();
+  if (contra === "") {
+    errorContra.textContent = "La contraseña está vacía.";
+  } else if (!contraRegex.test(contra)) {
+    errorContra.textContent =
+      "La contraseña solo debe contener letras, números y guiones.";
+  } else {
+    errorContra.textContent = "";
+  }
+}
+
+// Eventos en tiempo real
+correoInput.addEventListener("input", validarCorreo);
+contraInput.addEventListener("input", validarContra);
+
+// Validación final al enviar
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  validarCorreo();
+  validarContra();
+
+  if (errorCorreo.textContent || errorContra.textContent) {
+    return; // bloquea envío si hay errores
+  }
+  const correo = correoInput.value.trim();
+  const contra = contraInput.value.trim();
+
+  login(correo, contra);
+});

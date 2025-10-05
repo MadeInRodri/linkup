@@ -45,8 +45,9 @@ export const createAccount = async (user) => {
     // console.log(docRef);
     // console.log(key);
     // console.log("Usuario creado");
+    return key;
   } catch (error) {
-    console.log(error);
+    return false;
   }
 };
 
@@ -77,7 +78,7 @@ export const loginUser = async (email, password) => {
       return userId;
     } else {
       // console.log("Contraseña incorrecta");
-      return null;
+      return false;
     }
   } catch (error) {
     console.error("Error en login:", error);
