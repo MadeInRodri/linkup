@@ -355,14 +355,12 @@ main {
     display: flex;
     flex-direction: column;
 
-    #publicaciones {
-      margin-bottom: 5rem;
+    main {
+      height: 90%;
     }
 
     .navbar {
-      z-index: 100;
-      position: absolute;
-      bottom: 0;
+      height: 10%;
       order: 2;
       width: 100vw;
       background-color: white;
