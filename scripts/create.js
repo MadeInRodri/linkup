@@ -5,7 +5,7 @@ import {
   textoVacioAlert,
 } from "./alerts.js";
 import { subirImagen } from "./cloudinary.js";
-import { createPost } from "./firebase.js";
+import { createPost, getUserById } from "./firebase.js";
 
 //Variables fuera de la publicación
 const textarea = document.querySelector("#textarea-post");
@@ -94,7 +94,6 @@ const posting = async () => {
   }
 
   let url = await subirImagen(selectedFile);
-  console.log(url);
   userPost(usuario.id, textarea.value, url);
 };
 
@@ -112,6 +111,9 @@ const userPost = async (user_id, description, picture) => {
 
   let posteado = await createPost(post);
   if (posteado) {
+    let actuUsario;
+    actuUsario = await getUserById(usuario.id);
+    localStorage.setItem("infoUsuarioActual", JSON.stringify(actuUsario));
     publicacionAlert();
   }
 };
