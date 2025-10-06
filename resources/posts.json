@@ -1,0 +1,22 @@
+[
+  {
+    "user_id": 1,
+    "id": 1,
+    "description": "This is my post...",
+    "likes": 12,
+    "picture": "url....",
+    "date": "07/09/2025",
+    "comments": [
+      {
+        "user_id": 2,
+        "text": "Hello, this is a commentary",
+        "likes": 3
+      },
+      {
+        "user_id": 3,
+        "text": "Hello, this is another",
+        "likes": 3
+      }
+    ]
+  }
+]

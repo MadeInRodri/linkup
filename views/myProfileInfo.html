@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../styles/homepage.css" />
+    <link rel="stylesheet" href="../styles/myProfileInfo.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" href="../images/linkup.png" type="image/png" />
+    <title>Información de mi perfil</title>
+  </head>
+  <body>
+    <!--Encabezado-->
+    <header>LinkUp</header>
+    <!--Cuerpo principal de la ventana-->
+    <div class="principal-container">
+      <!--Navbar-->
+      <nav class="navbar">
+        <a href="./homepage.html">
+          <i class="fa-solid fa-house"></i>
+          <span class="text-button">Inicio</span>
+        </a>
+        <a href="./create.html">
+          <i class="fa-solid fa-plus"></i>
+          <span class="text-button">Crear</span>
+        </a>
+        <a href="./search.html">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span class="text-button">Buscar</span>
+        </a>
+        <a href="./profile.html">
+          <i class="fa-solid fa-circle-user"></i>
+          <span class="text-button">Mi Perfil</span>
+        </a>
+        <button id="salir">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span class="text-button">Cerrar sesión</span>
+        </button>
+      </nav>
+
+      <main>
+        <!--Publicaciones-->
+        <section>
+          <h3>¡Personaliza tu perfil!</h3>
+          <input type="file" id="profile-input" accept="image/*" hidden />
+          <input type="file" id="bio-input" accept="image/*" hidden />
+        </section>
+        <section class="info">
+          <article>
+            <h4>Foto de perfil:</h4>
+            <button id="profile-img-button">
+              <picture id="profile-preview">
+                <img id="profile-img" class="img-profile" src="" alt="" />
+              </picture>
+            </button>
+          </article>
+          <article>
+            <h4>Información personal:</h4>
+            <article class="form">
+              <div class="form-input">
+                <label for="">Nombre:</label>
+                <input type="text" id="name" />
+              </div>
+              <div class="form-input">
+                <label for="">Descripción:</label>
+                <textarea name="" id="description"></textarea>
+              </div>
+            </article>
+          </article>
+        </section>
+        <section class="photo">
+          <h4>Foto de la biografía:</h4>
+          <button id="bio-img-button">
+            <picture id="bio-preview">
+              <img id="bio-img" class="img-profile" src="" alt="" />
+            </picture>
+          </button>
+        </section>
+        <section>
+          <button class="save" id="save-button">Guardar Info</button>
+        </section>
+      </main>
+
+      <aside class="side-menu">
+        <section class="title">
+          <h3>Mis amigos:</h3>
+        </section>
+        <section class="friends" id="friends-container"></section>
+      </aside>
+    </div>
+  </body>
+  <script src="../scripts/myProfileInfo.js" type="module"></script>
+  <script src="../scripts/logout.js" type="module"></script>
+  <script src="../scripts/asideFriends.js" type="module"></script>
+</html>

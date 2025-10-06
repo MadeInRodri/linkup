@@ -1,0 +1,115 @@
+body {
+  background: linear-gradient(to bottom, #fd007a, #3800a8);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  height: 100%;
+}
+
+h1 {
+  font-family: "Lobster", cursive;
+  color: white;
+  font-size: 64px;
+  margin-bottom: 2rem;
+}
+
+a {
+  color: white;
+}
+
+.contform {
+  width: 400px;
+  max-width: 400px;
+  height: 35px;
+  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  padding-left: 45px;
+  border: none;
+  color: #7f08c4;
+  border-radius: 20px;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: 20px 16px;
+  background-position: 15px center;
+}
+
+.contform::placeholder {
+  color: #7f08c4;
+}
+
+.contform.iusuario {
+  background-image: url("../images/usuario.png");
+}
+
+.contform.icontra {
+  background-image: url("../images/contra.png");
+}
+
+.btn-login {
+  width: 200px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #e3b0ce;
+  background-color: transparent;
+  border: 1px solid white;
+  font-family: "Inter", sans-serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.btn-login:hover {
+  border: 1px solid rgb(0, 0, 0);
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 90px;
+  }
+
+  .contform {
+    width: 400px;
+    font-size: 16px;
+  }
+
+  .btn-login {
+    width: 200px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 599px) {
+  h1 {
+    font-size: 64px;
+  }
+
+  .contform {
+    width: 300px;
+    font-size: 15px;
+  }
+
+  .btn-login {
+    width: 150px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {
+  h1 {
+    font-size: 64px;
+  }
+
+  .contform {
+    width: 300px;
+    font-size: 15px;
+  }
+
+  .btn-login {
+    width: 150px;
+    font-size: 15px;
+  }
+}
