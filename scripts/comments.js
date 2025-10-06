@@ -1,9 +1,16 @@
+import { addCommentToPost } from "./firebase.js";
 
 export function abrirModalComentarios(post, user) {
+  const usuarioActual = JSON.parse(localStorage.getItem("infoUsuarioActual"));
+  const userLiked = post.likes && post.likes.includes(usuarioActual.id);
+
+  const likesCount = post.likes ? post.likes.length : 0;
+  const commentsCount = post.comments ? post.comments.length : 0;
+
   const comentariosHTML = post.comments
     .map(
       (c) => `
-    <p><strong>${c.username}:</strong> ${c.text}</p>
+    <p><strong>@${c.username}:</strong> ${c.text}</p>
   `
     )
     .join("");
@@ -32,20 +39,25 @@ export function abrirModalComentarios(post, user) {
               </div>
             </div>
           </div>
+          
           <div class="acciones">
             <div class="iconos-interaccion">
-              <i class="fa-regular fa-heart icono"></i>
+              <i class="${userLiked ? "fa-solid" : "fa-regular"} fa-heart icono" style="${userLiked ? "color:#fd007a;" : ""}"></i>
+              <span>${likesCount}</span>
               <i class="fa-regular fa-comment icono" id="closeComments"></i>
+              <span>${commentsCount}</span>
             </div>
             <div class="campo-comentario">
-              <input type="text" placeholder="Añade un comentario...">
-              <button class="btn-publicar">Publicar</button>
+              <input type="text" id="nuevoComentario" placeholder="Añade un comentario...">
+              <button class="btn-publicar" id="btnPublicar">Publicar</button>
             </div>
           </div>
         </section>
       </div>
     </div>
   `;
+
+  // Acciones para el modal
   document.getElementById("commentsModal").style.display = "flex";
   document.getElementById("commentsModal").classList.add("active");
 
@@ -53,5 +65,34 @@ export function abrirModalComentarios(post, user) {
     document.getElementById("commentsModal").style.display = "none";
     document.getElementById("commentsModal").classList.remove("active");
   };
+
+  // hace que al tocar el fondo transparente se pueda salir (y no solo tener que ocupar el boton de comentarios)
+  const modal = document.getElementById("commentsModal");
+  modal.onclick = function (e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+      modal.classList.remove("active");
+    }
+  };
+
+  // Evento para publicar comentario
+  const btnPublicar = document.getElementById("btnPublicar");
+  if (btnPublicar) {
+    btnPublicar.onclick = async function () {
+      const input = document.getElementById("nuevoComentario");
+      const texto = input.value.trim();
+      if (texto.length === 0) return;
+
+      await addCommentToPost({
+        postId: post.id,
+        username: usuarioActual.username,
+        text: texto,
+      });
+
+      // Recarga el modal para mostrar el nuevo comentario
+      post.comments.push({ username: usuarioActual.username, text: texto });
+      abrirModalComentarios(post, user);
+    };
+  }
 }
 
