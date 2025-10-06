@@ -1,0 +1,200 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+/* parte del modal */
+.fondo-oscuro {
+    background-color: rgba(0, 0, 0, 0.548);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* todos los arreglos para el contenedor */
+.contenedor-central {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    overflow: hidden;
+    
+}
+
+/* lado de la imagen */
+.lado-post {
+    background-color: #000000;
+    flex: 1 1 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 737.5 px;
+    height: 774.61 px;
+
+}
+
+.lado-post img {
+    max-width: 737.5px;
+    max-height: 774.61px;
+    min-width: 100%;
+    object-fit: contain;
+}
+
+/* lado donde esta todo, usuario, info, comentarios, descripcion y subir comentario */
+.lado-info {
+    flex: 1 1 400px;
+    padding: 2rem;
+}
+
+.lado-info h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+
+/* parte de arriba, usuario fijo */
+.info-usuario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nombre {
+    font-weight: bold;
+    color: #333;
+}
+
+.username {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* arreglos para el avatar de usuario, imagen pequeña y redonda */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.5rem;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* parte de los comentarios */
+.comentarios {
+    margin-top: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.Contenedor-comment {
+
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    background-color: #ffffff;
+    min-height: 550px;
+    max-height: 550px;
+
+}
+
+/* media query para telefonos */
+@media (max-width: 768px) {
+    .Contenedor-comment {
+        overflow-y: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        background-color: #ffffff;
+        min-height: 200px;
+        max-height: 200px;
+        padding-right: 40px;
+
+    }
+
+    .lado-post img {
+        max-width: 300px;
+        max-height: 300px;
+        object-fit: contain;
+        
+    }
+
+
+
+}
+
+.Contenedor-comment::-webkit-scrollbar {
+    display: none;
+}
+
+/* parte de publicar un comentario */
+.acciones {
+    border-top: 1px solid #dbdbdb;
+    background-color: #fff;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 100px;
+}
+
+.iconos-interaccion {
+    display: flex;
+    gap: 1rem;
+}
+
+.icono {
+    font-size: 25px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.icono:hover {
+    transform: scale(1.1);
+}
+
+.campo-comentario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.campo-comentario input[type="text"] {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    color: #262626;
+}
+
+.campo-comentario input::placeholder {
+    color: #999;
+}
+
+.btn-publicar {
+    background: none;
+    border: none;
+    color: #fd007a;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: opacity 0.2s ease;
+}
+
+.btn-publicar:hover {
+    opacity: 0.7;
+}
+
+#commentsModal.active {
+    display: flex !important;
+}
