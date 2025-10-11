@@ -1,0 +1,243 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* parte del modal */
+.fondo-oscuro {
+  background-color: rgba(0, 0, 0, 0.548);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.contenedor-primero {
+  max-height: 90vh;
+}
+
+/* todos los arreglos para el contenedor */
+.contenedor-central {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  /* height: 100%; */
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+/* lado de la imagen */
+.lado-post {
+  background-color: #000000;
+  flex: 1 1 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.lado-post img {
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: contain;
+}
+
+/* lado donde esta todo, usuario, info, comentarios, descripcion y subir comentario */
+.lado-info {
+  flex: 1 1 400px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  /* height: 100%; */
+  box-sizing: border-box;
+}
+
+.lado-info h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+/* parte de arriba, usuario fijo */
+.info-usuario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nombre {
+  font-weight: bold;
+  color: #333;
+}
+
+.username {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* arreglos para el avatar de usuario, imagen pequeña y redonda */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5rem;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  height: 10%;
+  padding: 120x;
+  flex: 0 0 10%;
+  min-height: 48px;
+  max-height: 10%;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+/* parte de los comentarios */
+.comentarios {
+  margin-top: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+/* comentarios de usuarios */
+.comentarios p {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+}
+
+.contenedor-comentarios {
+  height: 70%;
+  padding: 15px;
+}
+.Contenedor-comment {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background-color: #ffffff;
+  min-height: 510px;
+  max-height: 550px;
+}
+.campo-comentario input {
+  width: 100%;
+  margin-left: 10px;
+}
+
+@media (width < 890px) {
+  .contenedor-central {
+    max-height: 100%;
+  }
+}
+
+/* media query para telefonos */
+@media (max-width: 768px) {
+  .Contenedor-comment {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    background-color: #ffffff;
+    min-height: 200px;
+    max-height: 200px;
+    padding-right: 40px;
+  }
+
+  .lado-post img {
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: contain;
+  }
+
+  .acciones {
+    border-top: 1px solid #dbdbdb;
+    background-color: #fff;
+    padding-top: 2rem;
+    margin-right: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 100px;
+  }
+
+  .icono {
+    font-size: 20px !important;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+}
+
+.Contenedor-comment::-webkit-scrollbar {
+  display: none;
+}
+
+/* parte de publicar un comentario */
+.acciones {
+  border-top: 1px solid #dbdbdb;
+  background-color: #fff;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 100px;
+}
+
+.iconos-interaccion {
+  display: flex;
+  gap: 1rem;
+}
+
+.icono {
+  font-size: 25px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icono:hover {
+  transform: scale(1.1);
+}
+
+.campo-comentario {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.campo-comentario input[type="text"] {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  background-color: transparent;
+  color: #262626;
+}
+
+.campo-comentario input::placeholder {
+  color: #999;
+}
+
+.btn-publicar {
+  background: none;
+  border: none;
+  color: #fd007a;
+  font-weight: 700;
+  cursor: pointer;
+  padding-left: 0.1rem;
+  transition: opacity 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.btn-publicar:hover {
+  opacity: 0.7;
+}
+
+#commentsModal.active {
+  display: flex !important;
+}

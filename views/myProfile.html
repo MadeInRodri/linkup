@@ -1,60 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    />
 
-    <link rel="stylesheet" href="../styles/homepage.css" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="icon" href="../images/linkup.png" type="image/png" />
-    <title>Mi Perfil</title>
-  </head>
-  <body>
-    <!--Encabezado-->
-    <header>LinkUp</header>
-    <!--Cuerpo principal de la ventana-->
-    <div class="principal-container">
-      <!--Navbar-->
-      <nav class="navbar">
-        <a href="./homepage.html">
-          <i class="fa-solid fa-house"></i>
-          <span class="text-button">Inicio</span>
-        </a>
-        <a href="./create.html">
-          <i class="fa-solid fa-plus"></i>
-          <span class="text-button">Crear</span>
-        </a>
-        <a href="./search.html">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <span class="text-button">Buscar</span>
-        </a>
-        <a href="./profile.html">
-          <i class="fa-solid fa-circle-user"></i>
-          <span class="text-button">Mi Perfil</span>
-        </a>
-        <button id="salir">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          <span class="text-button">Cerrar sesión</span>
-        </button>
-      </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
-      <main>
-        <!--Publicaciones-->
-      </main>
+  <link rel="stylesheet" href="../styles/homepage.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="icon" href="../images/linkup.png" type="image/png" />
+  <link rel="stylesheet" href="../styles/comments.css" />
+  <title>Mi Perfil</title>
+</head>
 
-      <aside class="side-menu">
-        <section class="title">
-          <h3>Mis amigos:</h3>
-        </section>
-        <section class="friends" id="friends-container"></section>
-      </aside>
+<body>
+  <!--Encabezado-->
+  <header>LinkUp</header>
+  <!--Cuerpo principal de la ventana-->
+  <div class="principal-container">
+    <!--Navbar-->
+    <nav class="navbar">
+      <a href="./homepage.html">
+        <i class="fa-solid fa-house"></i>
+        <span class="text-button">Inicio</span>
+      </a>
+      <a href="./create.html">
+        <i class="fa-solid fa-plus"></i>
+        <span class="text-button">Crear</span>
+      </a>
+      <a href="./search.html">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span class="text-button">Buscar</span>
+      </a>
+      <a href="./profile.html">
+        <i class="fa-solid fa-circle-user"></i>
+        <span class="text-button">Mi Perfil</span>
+      </a>
+      <button id="salir">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span class="text-button">Cerrar sesión</span>
+      </button>
+    </nav>
+
+    <main>
+      <!--Publicaciones-->
+    </main>
+
+    <aside class="side-menu">
+      <section class="title">
+        <h3>Mis amigos:</h3>
+      </section>
+      <section class="friends" id="friends-container"></section>
+    </aside>
+  </div>
+  <!-- parte para mostrar el comentario encima de todo -->
+  <div id="commentsModal"
+    style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); z-index:9999; justify-content:center; align-items:center;">
+    <div id="commentsContent"
+      style="background:#fff; border-radius:12px; max-width:1600px; width:90vw; max-height:90vh; overflow:auto; position:relative;">
+      <button id="closeComments" style="position:absolute; top:10px; right:10px; z-index:10;">&times;</button>
     </div>
-  </body>
-  <script src="../scripts/myProfile.js" type="module"></script>
-  <script src="../scripts/logout.js" type="module"></script>
-  <script src="../scripts/asideFriends.js" type="module"></script>
+  </div>
+</body>
+<script src="../scripts/myProfile.js" type="module"></script>
+<script src="../scripts/logout.js" type="module"></script>
+<script src="../scripts/asideFriends.js" type="module"></script>
+
 </html>

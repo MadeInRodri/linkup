@@ -25,36 +25,36 @@ const cargarPosts = async () => {
       const userLiked = post.likes.includes(usuario.id);
 
       postsUserHTML += `
-    <article class="post-container">
-      <section class="post">
-        <img src="${post.picture}" alt="${post.description}" />
-        <a href="./profile.html?user_id=${post.user_id}" class="profile">
-          <picture>
-            <img src="${user.profile_pic}" />
-          </picture>
-          <span class="user-text">
-            <span>${user.name}</span>
-            <span>@${user.username}</span>
-          </span>
-        </a>
-        <div class="actions-post">
-          <button class="button-post like-btn" id="${post.id}">
-            <i class="${userLiked ? "fa-solid" : "fa-regular"} fa-heart"></i>
-            <span>${likes}</span>
-          </button>
-          <button class="button-post">
-            <i class="fa-regular fa-comment"></i>
-            <span>${comments}</span>
-          </button>
-        </div>
-        <div class="blur"></div>
-      </section>
-      <section class="description-post">
-        <p>
-          <strong>@${user.username}</strong> ${post.description}
-        </p>
-      </section>
-    </article>`;
+      <article class="post-container">
+        <section class="post">
+          <img src="${post.picture}" alt="${post.description}" />
+          <a href="./profile.html?user_id=${post.user_id}" class="profile">
+            <picture>
+              <img src="${user.profile_pic}" />
+            </picture>
+            <span class="user-text">
+              <span>${user.name}</span>
+              <span>@${user.username}</span>
+            </span>
+          </a>
+          <div class="actions-post">
+            <button class="button-post like-btn" id="${post.id}">
+              <i class="${userLiked ? "fa-solid" : "fa-regular"} fa-heart"></i>
+              <span>${likes}</span>
+            </button>
+            <button class="button-post comment-btn">
+              <i class="fa-regular fa-comment"></i>
+              <span>${comments}</span>
+            </button>
+          </div>
+          <div class="blur"></div>
+        </section>
+        <section class="description-post">
+          <p>
+            <strong>@${user.username}</strong> ${post.description}
+          </p>
+        </section>
+      </article>`;
     }
 
     //Agregamos el html al muro
@@ -90,5 +90,20 @@ const cargarPosts = async () => {
     });
   }
 };
+
+import { abrirModalComentarios } from "./comments.js";
+
+// Delegación para abrir el modal al hacer click en el botón de comentario
+mainContainer.addEventListener("click", async function (e) {
+  const commentBtn = e.target.closest(".comment-btn");
+  if (commentBtn) {
+    const postContainer = commentBtn.closest(".post-container");
+    const index = Array.from(mainContainer.children).indexOf(postContainer);
+    let posts = await getPostsByDate();
+    let post = posts[index];
+    let user = await getUserById(post.user_id);
+    abrirModalComentarios(post, user);
+  }
+});
 
 cargarPosts();

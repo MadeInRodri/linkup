@@ -74,7 +74,7 @@ const cargarPostsUsuario = async (myUser) => {
         <i class="${userLiked ? "fa-solid" : "fa-regular"} fa-heart"></i>
         <span>${likes}</span>
       </button>
-      <button class="button-post">
+      <button class="button-post comment-btn">
         <i class="fa-regular fa-comment"></i>
         <span>${comments}</span>
       </button>
@@ -143,6 +143,23 @@ const cargarPostsUsuario = async (myUser) => {
     mainContainer.innerHTML += postsUserHTML;
   }
 };
+
+import { abrirModalComentarios } from "./comments.js";
+import { getUserById } from "./firebase.js";
+
+// Delegación para abrir el modal al hacer click en el botón de comentario
+mainContainer.addEventListener("click", async function (e) {
+  const commentBtn = e.target.closest(".comment-btn");
+  if (commentBtn) {
+    const postContainer = commentBtn.closest(".post-container");
+    const postContainers = Array.from(mainContainer.querySelectorAll(".post-container"));
+    const index = postContainers.indexOf(postContainer);
+    let posts = await getPostsByUser(userId);
+    let post = posts[index];
+    let user = await getUserById(userId);
+    abrirModalComentarios(post, user);
+  }
+});
 
 /* ZONA DE EJECUCIÓN DE MÉTODOS */
 document.addEventListener("DOMContentLoaded", cargarUsuario);

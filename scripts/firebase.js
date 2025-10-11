@@ -277,3 +277,23 @@ export const deletePost = async (id) => {
     throw error;
   }
 };
+
+export const addCommentToPost = async ({ postId, username, text }) => {
+  try {
+    const postRef = doc(db, "posts", postId);
+    const postSnap = await getDoc(postRef);
+
+    if (!postSnap.exists()) return false;
+
+    // Ya no verificamos si el usuario ya comentó
+    const nuevoComentario = { username, text };
+    await updateDoc(postRef, {
+      comments: arrayUnion(nuevoComentario),
+    });
+
+    return true;
+  } catch (error) {
+    console.error("Error al agregar comentario:", error);
+    return false;
+  }
+};
