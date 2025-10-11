@@ -9,7 +9,6 @@ import { loginUser, getUserById } from "./firebase.js";
 
 //Método para logearse (pantalla de login)
 const login = async (email, password) => {
-  console.log("Hola");
   let id = await loginUser(email, password);
 
   if (id == false) {
