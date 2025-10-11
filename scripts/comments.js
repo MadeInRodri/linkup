@@ -14,9 +14,8 @@ export function abrirModalComentarios(post, user) {
   `
     )
     .join("");
-
   document.getElementById("commentsContent").innerHTML = `
-    <div>
+    <div class ="contenedor-primero">
       <div class="contenedor-central">
         <section class="lado-post">
           <img src="${post.picture}" alt="Post visual" class="img-post">
@@ -42,7 +41,11 @@ export function abrirModalComentarios(post, user) {
           
           <div class="acciones">
             <div class="iconos-interaccion">
-              <i class="${userLiked ? "fa-solid" : "fa-regular"} fa-heart icono" style="${userLiked ? "color:#fd007a;" : ""}"></i>
+              <i class="${
+                userLiked ? "fa-solid" : "fa-regular"
+              } fa-heart icono" style="${
+    userLiked ? "color:#fd007a;" : ""
+  }"></i>
               <span>${likesCount}</span>
               <i class="fa-regular fa-comment icono" id="closeComments"></i>
               <span>${commentsCount}</span>
@@ -95,4 +98,3 @@ export function abrirModalComentarios(post, user) {
     };
   }
 }
-
