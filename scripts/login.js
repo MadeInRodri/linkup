@@ -3,6 +3,7 @@ import {
   loginIncorrectoAlert,
   usuarioInexistenteAlert,
 } from "./alerts.js";
+
 import { loginUser, getUserById } from "./firebase.js";
 
 /* ZONA EN DESARROLLO, ESTA PANTALLA YA NO ESTÁ EN ZONA DE PRUEBAS */
@@ -77,7 +78,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   if (errorCorreo.textContent || errorContra.textContent) {
     return; // bloquea envío si hay errores
   }
-  const correo = correoInput.value.trim();
+  const correo = correoInput.value.trim().toLowerCase();
   const contra = contraInput.value.trim();
 
   login(correo, contra);

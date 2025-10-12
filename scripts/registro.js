@@ -141,7 +141,7 @@ document
     const nombre = nombreInput.value.trim();
     const apellido = apellidoInput.value.trim();
     const usuario = usuarioInput.value.trim();
-    const correo = correoInput.value.trim();
+    const correo = correoInput.value.trim().toLowerCase();
     const contra = contraInput.value.trim();
 
     await createUser(`${nombre} ${apellido}`, usuario, correo, contra);
